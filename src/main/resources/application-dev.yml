@@ -1,0 +1,18 @@
+spring: 
+  zipkin:
+    enabled: false
+
+eureka:
+  client:
+    serviceUrl: 
+      defaultZone: http://127.0.0.1:1001/eureka
+
+feign:
+  hystrix:
+    enabled: false
+
+citylife: 
+  function: 
+    mdcFilterEnabled: true
+
+

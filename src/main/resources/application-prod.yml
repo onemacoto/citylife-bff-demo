@@ -1,0 +1,15 @@
+spring: 
+  zipkin: 
+   enabled:
+     sender:
+       type: web
+   base-url: http://172.40.2.127:9411
+
+eureka:
+  client:
+    serviceUrl: 
+      defaultZone: http://172.40.2.115:8761/eureka,http://172.40.2.116:8761/eureka
+
+feign:
+  hystrix:
+    enabled: false

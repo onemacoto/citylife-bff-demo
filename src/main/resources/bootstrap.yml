@@ -1,0 +1,10 @@
+spring: 
+  application:
+    name: bff-demo
+  profiles: 
+    include: base
+    active: windows,dev 
+server:
+  port: 1003
+logging:
+    config: classpath:citylife-logback.xml
