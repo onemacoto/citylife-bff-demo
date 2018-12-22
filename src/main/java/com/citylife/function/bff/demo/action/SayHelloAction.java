@@ -24,7 +24,7 @@ public class SayHelloAction extends AbstractFunctionAction<AnyRequest, AnyRespon
     
     ResultEntity<List<Product>> result = productClient.getProductList(new GetProductListRequest() , context.getToken());
     if (result.hasError()) {
-      return ResultEntity.failure(result.getRtnCode());
+      return ResultEntity.failure(result.getRtnCode(), result.getMessages());
     }
     return ResultEntity.ok(AnyResponse.build().put("title", "hello ".concat(context.getParameter().get("name"))).put("products", result.getValue()));
   }

@@ -9,8 +9,8 @@ eureka:
 
 feign:
   hystrix:
-    enabled: false
-
+    #enabled: false
+     enabled: true
 citylife: 
   function: 
     mdcFilterEnabled: true
