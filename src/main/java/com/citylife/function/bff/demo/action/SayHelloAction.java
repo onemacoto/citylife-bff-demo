@@ -11,6 +11,7 @@ import com.citylife.common.model.ResultEntity;
 import com.citylife.function.api.demo.client.IProductClient;
 import com.citylife.function.api.demo.client.entity.GetProductListRequest;
 import com.citylife.function.api.demo.client.entity.Product;
+import com.citylife.function.core.api.feign.ApiClientResultUtils;
 import com.citylife.function.core.boot.template.context.IActionContext;
 
 @Component
@@ -21,11 +22,8 @@ public class SayHelloAction extends AbstractFunctionAction<AnyRequest, AnyRespon
 
   @Override
   public ResultEntity<AnyResponse> execute(IActionContext<AnyRequest> context) {
-    
     ResultEntity<List<Product>> result = productClient.getProductList(new GetProductListRequest() , context.getToken());
-    if (result.hasError()) {
-      return ResultEntity.failure(result.getRtnCode(), result.getMessages());
-    }
+    ApiClientResultUtils.validate(result);
     return ResultEntity.ok(AnyResponse.build().put("title", "hello ".concat(context.getParameter().get("name"))).put("products", result.getValue()));
   }
 }
