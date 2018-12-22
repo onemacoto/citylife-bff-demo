@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <properties>
-    <fn-zz-client.version>0.0.1-SNAPSHOT</fn-zz-client.version>
+    <fn-demo-client.version>0.0.1-SNAPSHOT</fn-demo-client.version>
   </properties>
   <dependencies>
     <dependency>
@@ -21,8 +21,8 @@
     </dependency>
     <dependency>
       <groupId>com.citylife</groupId>
-      <artifactId>fn-zz-client</artifactId>
-      <version>${fn-zz-client.version}</version>
+      <artifactId>fn-demo-client</artifactId>
+      <version>${fn-demo-client.version}</version>
     </dependency>
   </dependencies>
   <build>

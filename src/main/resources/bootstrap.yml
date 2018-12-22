@@ -3,7 +3,9 @@ spring:
     name: bff-demo
   profiles: 
     include: base
-    active: windows,dev 
+    active: windows,dev
+  messages:
+    basename: i18n/messages, i18n/system-messages
 server:
   port: 1003
 logging:

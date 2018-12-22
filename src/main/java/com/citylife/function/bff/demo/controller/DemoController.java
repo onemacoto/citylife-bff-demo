@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.citylife.common.model.AnyRequest;
+import com.citylife.common.model.AnyResponse;
+import com.citylife.common.model.ResultEntity;
 import com.citylife.function.bff.demo.action.SayHelloAction;
 import com.citylife.function.bff.demo.service.DemoService;
 import com.citylife.function.core.api.feign.IApiClient;
 import com.citylife.function.core.boot.template.AbstractTemplateController;
-import com.citylife.function.core.boot.template.bean.AnyRequest;
-import com.citylife.function.core.boot.template.bean.AnyResponse;
-import com.citylife.function.core.boot.template.bean.ResultEntity;
 
 @RestController
 public class DemoController extends AbstractTemplateController<DemoService>  {
@@ -21,7 +21,7 @@ public class DemoController extends AbstractTemplateController<DemoService>  {
   private SayHelloAction sayHelloAction;
 
   @PostMapping("/sayHello")
-  public ResultEntity<AnyResponse> sayHello(@RequestBody(required=false) final AnyRequest request, @RequestHeader(name = IApiClient.HEADER_TOKEN_KEY) final String token) {
+  public ResultEntity<AnyResponse> sayHello(@RequestBody final AnyRequest request, @RequestHeader(name = IApiClient.HEADER_TOKEN_KEY) final String token) {
     return doAction(sayHelloAction, request, token);
   }
 
