@@ -22,7 +22,7 @@ public class SayHelloAction extends AbstractFunctionAction<AnyRequest, AnyRespon
 
   @Override
   public ResultEntity<AnyResponse> execute(IActionContext<AnyRequest> context) {
-    ResultEntity<List<Product>> result = productClient.getProductList(new GetProductListRequest(), context.getToken());
+    ResultEntity<List<Product>> result = productClient.findAll(new GetProductListRequest(), context.getVersion(), context.getToken());
     ApiClientResultUtils.validate(result);
     return ResultEntity.ok(
         AnyResponse.build().put("title", "hello ".concat(context.getParameter().get("name")))
