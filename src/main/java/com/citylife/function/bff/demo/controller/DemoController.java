@@ -11,12 +11,12 @@ import com.citylife.common.model.AnyRequest;
 import com.citylife.common.model.AnyResponse;
 import com.citylife.common.model.ResultEntity;
 import com.citylife.function.bff.demo.action.SayHelloAction;
-import com.citylife.function.bff.demo.service.DemoService;
 import com.citylife.function.core.api.feign.IApiClient;
 import com.citylife.function.core.boot.template.AbstractTemplateController;
+import com.citylife.function.core.boot.template.TemplateService;
 
 @RestController
-public class DemoController extends AbstractTemplateController<DemoService> implements IApiClient  {
+public class DemoController extends AbstractTemplateController<TemplateService> implements IApiClient  {
 
   @Autowired
   private SayHelloAction sayHelloAction;
