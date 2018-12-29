@@ -3,8 +3,11 @@ package com.citylife.function.bff.demo.action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.citylife.common.model.AnyRequest;
-import com.citylife.common.model.AnyResponse;
+import com.citylife.common.model.AnyRequestVO;
+import com.citylife.common.model.AnyResponseData;
+import com.citylife.common.model.AnyResponseVO;
+import com.citylife.common.model.RequestVO;
+import com.citylife.common.model.ResponseVO;
 import com.citylife.common.model.ResultEntity;
 import com.citylife.function.api.demo.client.IUserClient;
 import com.citylife.function.api.demo.client.entity.User;
@@ -12,16 +15,17 @@ import com.citylife.function.core.api.feign.ApiClientResultUtils;
 import com.citylife.function.core.boot.template.context.IActionContext;
 
 @Component
-public class SayHelloAction extends AbstractFunctionAction<AnyRequest, AnyResponse> {
+public class SayHelloAction extends AbstractFunctionAction<AnyRequestVO, AnyResponseVO> {
 
   @Autowired
   private IUserClient productClient;
 
   @Override
-  public ResultEntity<AnyResponse> execute(IActionContext<AnyRequest> context) {
-    ResultEntity<User> result = productClient.getUser(Long.parseLong(context.getParameter().get("userId")), context.getVersion(), context.getToken());
+  public ResultEntity<AnyResponseVO> execute(IActionContext<AnyRequestVO> context) {
+	long userId = Long.parseLong(context.getParameter().getData().get("userId"));
+    ResultEntity<ResponseVO<User>> result = productClient.getUser(new RequestVO<>(userId), context.getVersion(), context.getToken());
     ApiClientResultUtils.validate(result);
-    return ResultEntity.ok(
-        AnyResponse.build().put("userInfo", result.getValue()));
+    AnyResponseData responseData = AnyResponseData.build().put("userInfo", result.getBody().getData());
+    return ResultEntity.ok(new AnyResponseVO(responseData));
   }
 }
