@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import com.citylife.common.model.AnyRequestVO;
 import com.citylife.common.model.AnyResponseData;
 import com.citylife.common.model.AnyResponseVO;
-import com.citylife.common.model.RequestVO;
 import com.citylife.common.model.ResponseVO;
 import com.citylife.common.model.ResultEntity;
+import com.citylife.common.model.builder.RequestVOBuilder;
 import com.citylife.function.api.demo.client.IUserClient;
 import com.citylife.function.api.demo.client.entity.User;
 import com.citylife.function.core.api.feign.ApiClientResultUtils;
@@ -23,7 +23,7 @@ public class SayHelloAction extends AbstractFunctionAction<AnyRequestVO, AnyResp
   @Override
   public ResultEntity<AnyResponseVO> execute(IActionContext<AnyRequestVO> context) {
 	long userId = Long.parseLong(context.getParameter().getData().get("userId"));
-    ResultEntity<ResponseVO<User>> result = productClient.getUser(new RequestVO<>(userId), context.getVersion(), context.getToken());
+    ResultEntity<ResponseVO<User>> result = productClient.getUser(RequestVOBuilder.build(userId), context.getVersion(), context.getToken());
     ApiClientResultUtils.validate(result);
     AnyResponseData responseData = AnyResponseData.build().put("userInfo", result.getBody().getData());
     return ResultEntity.ok(new AnyResponseVO(responseData));
